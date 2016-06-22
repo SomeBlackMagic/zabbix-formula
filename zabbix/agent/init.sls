@@ -12,3 +12,10 @@ zabbix-agent:
     - enable: True
     - require:
       - pkg: zabbix-agent
+
+zabbix-sender:
+  pkg.installed:
+    - name: {{ zabbix.agent.sender }}
+    {% if zabbix.agent.version is defined -%}
+    - version: {{ zabbix.agent.version }}
+    {%- endif %}
