@@ -85,7 +85,7 @@
       'pkgs': ['zabbix22-server'],
       'service': 'zabbix',
       'config': '/usr/local/etc/zabbix22/zabbix_server.conf',
-      'dbsocket': '/var/run/mysqld/mysqld.sock',
+      'dbsocket': '/tmp/mysql.sock',
       'pidfile': '/var/run/zabbix/zabbix_server.pid',
       'logfile': '/var/log/zabbix/zabbix_server.log'
     },
@@ -93,7 +93,7 @@
       'pkgs': ['zabbix22-proxy'],
       'service': 'zabbix_proxy',
       'config': '/usr/local/etc/zabbix22/zabbix_proxy.conf',
-      'dbname': '/var/lib/zabbix/zabbix_proxy.db',
+      'dbname': 'zabbix',
       'pidfile': '/var/run/zabbix/zabbix_proxy.pid',
       'logfile': '/var/log/zabbix/zabbix_proxy.log'
     }
