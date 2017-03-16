@@ -10,7 +10,7 @@
 ### Option: PidFile
 #	Name of PID file.
 #
-{% if settings.get('pidfile', false) %}PidFile={{ settings.get('pidfile') }}{% endif %}
+PidFile={% if settings.get('pidfile', false) %}{{ settings.get('pidfile') }}{% else %}{{ zabbix.agent.pidfile }}{% endif %}
 
 {% if zabbix.version_repo >= '3.0' -%}
 ### Option: LogType
@@ -24,15 +24,15 @@
 ### Option: LogFile
 #	Log file name for LogType 'file' parameter.
 #
-{% if settings.get('logfile', false) %}LogFile={{ settings.get('logfile', '/var/log/zabbix/zabbix_agentd.log') }}{% endif %}
+LogFile={% if settings.get('logfile', false) %}{{ settings.get('logfile') }}{% else %}{{ zabbix.agent.logfile }}{% endif -%}
 
 {% else %}
 ### Option: LogFile
 #	Name of log file.
 #	If not set, syslog is used.
 #
-{% if settings.get('logfile', false) %}LogFile={{ settings.get('logfile', '/var/log/zabbix/zabbix_agentd.log') }}{% endif %}
-{% endif -%}
+LogFile={% if settings.get('logfile', false) %}{{ settings.get('logfile') }}{% else %}{{ zabbix.agent.logfile }}{% endif -%}
+{% endif %}
 
 ### Option: LogFileSize
 #	Maximum size of log file in MB.
@@ -49,9 +49,8 @@
 #	4 - for debugging (produces lots of information)
 {% if zabbix.version_repo >= '3.0' -%}
 #	5 - extended debugging (produces even more information)
-{% endif %}
+{% endif -%}
 {% if settings.get('debuglevel', false) %}DebugLevel={{ settings.get('debuglevel') }}{% endif %}
-
 
 ### Option: SourceIP
 #	Source IP address for outgoing connections.
@@ -71,7 +70,6 @@
 #	1 - enabled
 #
 {% if settings.get('logremotecommands', false) %}LogRemoteCommands={{ settings.get('logremotecommands') }}{% endif %}
-
 
 ##### Passive checks related
 
@@ -198,15 +196,13 @@ Hostname={{ settings.get('hostname', salt['grains.get']('id')) }}
 #	Only has effect if run as 'root' and AllowRoot is disabled.
 #
 {% if settings.get('zabbix_user', false) %}User={{ settings.get('zabbix_user') }}{% endif %}
-
-{% endif %}
+{% endif -%}
 
 ### Option: Include
 #	You may include individual files or all files in a directory in the configuration file.
 #	Installing Zabbix will create include directory in /usr/local/etc, unless modified during the compile time.
 #
 {% if settings.get('include', false) %}Include={{ settings.get('include') }}{% endif %}
-
 
 ####### USER-DEFINED MONITORED PARAMETERS #######
 
@@ -236,7 +232,7 @@ UserParameter={{ userparameter }}
 #	Default depends on compilation options.
 #
 {% if settings.get('loadmodulepath', false) %}LoadModulePath={{ settings.get('loadmodulepath') }}{% endif %}
-{% endif %}
+{% endif -%}
 
 ### Option: LoadModule
 #	Module to load at agent startup. Modules are used to extend functionality of the agent.
