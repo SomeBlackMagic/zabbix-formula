@@ -1,0 +1,84 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{%- set zabbix = salt['grains.filter_by']({
+  'Ubuntu': {
+  },
+  'RedHat': {
+  },
+    'Suse': {
+  },
+  'FreeBSD': {
+  },
+  'Debian': {
+    'user': 'zabbix',
+    'group': 'zabbix',
+    'home': '/var/lib/zabbix',
+    'shell': '/bin/false',
+    'repo_version': '3.0',
+    'apache': 'apache2',
+    'sysstat': 'sysstat',
+    'nutserver': 'nut-server',
+    'agent': {
+      'pkg': 'zabbix-agent',
+      'service': 'zabbix-agent',
+      'config_path': '/etc/zabbix/zabbix_agentd.conf',
+      'config': {
+        'PidFile': '/var/run/zabbix/zabbix_agentd.pid',
+        'LogFile': '/var/log/zabbix/zabbix_agentd.log',
+        'LogFileSize': '0',
+        'Server': '127.0.0.1',
+        'ServerActive': '127.0.0.1',
+        'Hostname': 'zabbix_agent',
+        'Include': '/etc/zabbix/zabbix_agentd.conf.d/'
+      }
+    },
+    'server': {
+      'pkg': 'zabbix-server-mysql',
+      'service': 'zabbix-server',
+      'config_path': '/etc/zabbix/zabbix_server.conf',
+      'dbtype': 'MYSQL',
+      'dbscheme': '/usr/share/doc/zabbix-server-mysql/create.sql.gz',
+      'servername': 'Zabbix',
+      'config': {
+        'LogFile': '/var/log/zabbix/zabbix_server.log',
+        'PidFile': '/var/run/zabbix/zabbix_server.pid',
+        'DBName': 'zabbix',
+        'DBUser': 'zabbix',
+        'DBPassword': 'zabbix',
+        'Timeout': '30',
+        'AlertScriptsPath': '/etc/zabbix/alert.d/',
+        'FpingLocation': '/usr/bin/fping',
+        'Fping6Location': '/usr/bin/fping6',
+        'LogSlowQueries': '3000',
+        'Include': '/etc/zabbix/zabbix_server.conf.d/'
+      }
+    },
+    'frontend': {
+      'pkg': 'zabbix-frontend-php',
+      'config_path': '/etc/zabbix/web/zabbix.conf.php',  
+      'use_nginx': 'True'
+    },
+    'proxy': {
+      'pkg': 'zabbix-proxy-sqlite3',
+      'service': 'zabbix-proxy',
+      'config_path': '/etc/zabbix/zabbix_proxy.conf',
+      'config': {
+        'DBName': '/var/lib/zabbix/zabbix_proxy.db',
+        'DBUser': 'zabbix',
+        'Timeout': '4',
+        'PidFile': '/var/run/zabbix/zabbix_proxy.pid',
+        'LogFile': '/var/log/zabbix/zabbix_proxy.log',
+        'Server': '127.0.0.1',
+        'Hostname': 'zabbix_proxy',
+        'LogFileSize': '0',
+        'ExternalScripts': '/usr/lib/zabbix/externalscripts',
+        'FpingLocation': '/usr/bin/fping',
+        'Fping6Location': '/usr/bin/fping6',
+        'LogSlowQueries': '3000'
+      }
+    }
+  }
+}, grain="os", merge=salt['pillar.get']('zabbix:ng')) %}    
+
+
