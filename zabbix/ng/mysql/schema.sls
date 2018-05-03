@@ -4,21 +4,24 @@
 {% set dbname = zabbix.server.config.get('DBName', 'zabbix') %}
 {% set dbuser = zabbix.server.config.get('DBUser', 'zabbix') %}
 {% set dbpass = zabbix.server.config.get('DBPassword', 'zabbix') %}
-{% set scheme = zabbix.server.get('dbscheme', '/usr/share/doc/zabbix-server-mysql/create.sql.gz') %}
+{% set schema = zabbix.server.get('dbschema', '/usr/share/doc/zabbix-server-mysql/create.sql.gz') %}
 
 include:
   - mysql.client
   - zabbix.ng.mysql.config
   - zabbix.ng.server.install
 
-zabbix_db_apply_scheme:
+zabbix_db_apply_schema:
   cmd.run:
-    - name: /bin/zcat {{ scheme }} | /usr/bin/mysql -h {{ dbhost }} -u {{ dbuser }} --password={{ dbpass }} {{ dbname }} && touch {{ scheme }}.applied
-    - unless: test -f {{ scheme }}.applied
+    - name: /bin/zcat {{ schema }} | /usr/bin/mysql -h {{ dbhost }} -u {{ dbuser }} --password={{ dbpass }} {{ dbname }} && touch {{ schema }}.applied
+    - unless: test -f {{ schema }}.applied
     - require:
       - sls: zabbix.ng.server.install
       - sls: mysql.client
       - sls: zabbix.ng.mysql.config
+      - pkg: install_zcat
 
-
+install_zcat:
+  pkg.installed:
+    - name: {{ zabbix.gzip }}
 
