@@ -20,3 +20,15 @@ install_zabbix_proxy:
       - file: {{ tls_psk_file }}
       {% endif %}
 
+
+enable_autostart_zabbix_proxy:
+  file.managed:
+    - name: {{ zabbix.proxy.proxy_start_path }}
+    - user: root
+    - group: root
+    - mode: 644
+    - contents: 'START=yes'
+    - require:
+      - pkg: install_zabbix_proxy
+
+

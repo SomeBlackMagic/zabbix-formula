@@ -1,4 +1,3 @@
-# add fresh repo 
 {% from "zabbix/ng/map.jinja" import zabbix with context %}
 {% set osfamily = salt['grains.get']('os_family', False) %}
 
