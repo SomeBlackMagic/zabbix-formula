@@ -177,7 +177,10 @@ zabbix-formula ng
 
 New install formula, more simple and flexible. (For now support only Debian)
 Pillar data is optional, all neaded to install data exist in map.jinja, pillar owerwrite only neaded parameters.
-Depends: `mysql-formula <https://github.com/saltstack-formulas/mysql-formula>`, `nginx-formula <https://github.com/saltstack-formulas/nginx-formula>`, `php-formula <https://github.com/saltstack-formulas/php-formula>`.
+Depends: `mysql-formula 
+          <https://github.com/saltstack-formulas/mysql-formula>`_, `nginx-formula 
+          <https://github.com/saltstack-formulas/nginx-formula>`_, `php-formula 
+          <https://github.com/saltstack-formulas/php-formula>`_.
 
 Example of usage
 ================
@@ -196,7 +199,7 @@ Example of usage
     # proxy
     - zabbix.ng.frontend
 
-    # to install only neaded modules
+    # to install only needed modules
     - zabbix.ng.server.install
 
     - zabbix.ng.frontend.install
