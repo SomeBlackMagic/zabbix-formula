@@ -8,7 +8,7 @@
 
 {% set dbroot_user = zabbix.server.get('dbroot_user') %}
 {% set dbroot_pass = zabbix.server.get('dbroot_pass') %}
-{% set dbuser_host = zabbix.server.get('dbuser_host', 'localhost') -%}
+
 
 include:
   - mysql.server
@@ -28,7 +28,7 @@ zabbix_db:
       - sls: mysql.server
   mysql_user.present:
     - name: {{ dbuser }}
-    - host: '{{ dbuser_host }}'
+    - host: '{{ dbhost }}'
     - password: {{ dbpass }}
     {%- if dbroot_user and dbroot_pass %}
     - connection_host: {{ dbhost }}
