@@ -196,3 +196,106 @@ includes zabbix.repo and adds a requisite for the pkg state declaration
 
 Declares users and groups that could be needed in other formulas (e.g. in the
 users formula to make an user pertain to the service group).
+
+==================
+zabbix-formula ng
+==================
+
+New install formula, more simple and flexible. (For now support only Debian)
+Pillar data is optional, all neaded to install data exist in map.jinja, pillar owerwrite only neaded parameters.
+Depends: `mysql-formula <https://github.com/saltstack-formulas/mysql-formula/>`_, `nginx-formula <https://github.com/saltstack-formulas/nginx-formula>`_, `php-formula <https://github.com/saltstack-formulas/php-formula>`_.
+
+Example of usage
+================
+
+.. code:: yaml
+
+  base:
+    '*':
+    # full install with all dependencies to one server
+    # server 
+    - zabbix.ng.server
+
+    # agent
+    - zabbix.ng.agent
+
+    # proxy
+    - zabbix.ng.frontend
+
+    # to install only needed modules
+    - zabbix.ng.server.install
+
+    - zabbix.ng.frontend.install
+
+    - zabbix.ng.agent.install
+
+    - zabbix.ng.mysql.config
+    - zabbix.ng.mysql.schema
+
+    - zabbix.ng.proxy.install
+
+    - zabbix.ng.repo
+
+
+Available states
+================
+
+.. contents::
+    :local:
+
+``zabbix.ng.repo``
+------------------
+
+Configures official Zabbix repo, included in all install states.
+
+``zabbix.ng.agent``
+-------------------
+
+Installs the zabbix-agent package, apply config and starts the associated zabbix-agent service.
+
+``zabbix.ng.agent.install``
+---------------------------
+
+Installs the zabbix-agent package and starts the associated zabbix-agent service.
+
+``zabbix.ng.server``
+--------------------
+
+Installs the zabbix-server package, apply config, install mysql, install php and starts the associated zabbix-server service.
+
+``zabbix.ng.server.install``
+----------------------------
+
+Installs the zabbix-server package and starts the associated zabbix-server service.
+
+``zabbix.ng.proxy``
+-------------------
+
+Installs the zabbix-proxy package, apply config and starts the associated zabbix-agent service.
+
+``zabbix.ng.proxy.install`` 
+---------------------------
+
+Installs the zabbix-proxy package and starts the associated zabbix-agent service.
+
+``zabbix.ng.frontend``
+----------------------
+
+Installs the zabbix-frontend package and configure frontend connetcion to DB.
+
+``zabbix.ng.frontend.install``
+------------------------------
+
+Installs the zabbix-frontend package.
+
+``zabbix.ng.mysql``
+-------------------
+
+Creates database, mysql user for Zabbix and apply Zabbix schema.
+
+``zabbix.ng.mysql.config``
+--------------------------
+
+Creates database and mysql user for Zabbix.
+
+

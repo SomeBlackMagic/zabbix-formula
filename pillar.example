@@ -56,7 +56,7 @@ zabbix-mysql:
   dbhost: localhost
   dbname: zabbix
   dbuser: zabbixuser
-  dbpassword: zabbixpass
+  dbpass: zabbixpass
   dbuser_host: '%'
   # Optionally specify this for a non-local dbhost
   #dbroot_user: 'root'
@@ -67,7 +67,7 @@ zabbix-frontend:
   dbhost: localhost
   dbname: zabbix
   dbuser: zabbixuser
-  dbpassword: zabbixpass
+  dbpass: zabbixpass
   zbxserver: localhost
   zbxserverport: 10051
   zbxservername: 'Zabbix installed with saltstack'
@@ -89,27 +89,121 @@ zabbix-proxy:
   dbuser: zabbix
   include: /etc/zabbix/zabbix_proxy.d/
 
-# Example with PostgreSQL on Debian 9
-# Installation with PostgreSQL will likely not work with Zabbix version below 3.0
+# ------------------ NG ---------------------
+# New implementation of formula, based on pillar (no configs in states)
+# ALL data in pillar optional and have default values in map.jinja
+# use nginx instead of apache optional too.
+# to add any line (not used in map.jinja) to config just add it with valid name in config section.
 zabbix:
-  lookup:
-    version_repo: 3.4
-    agent:
-      version: '1:3.4.*'
-    frontend:
-      version: '1:3.4.*'
-      dbtype: POSTGRESQL
-    # you need to override default package list
-    server:
-      version: '1:3.4.*'
-      pkgs:
-        - zabbix-server-pgsql
-        - zabbix-get
-      # unset dbsocket, it's not used with PostgreSQL
-      dbsocket: ""
+   ng:
+    agent:    # agent config
+      config:
+        Server: 127.0.0.1
+        ServerActive: 127.0.0.1
+        Hostname: Zabbix_Agent01
+        # To enable TLS (optional)
+        TLSConnect: psk
+        TLSAccept: psk
+        TLSPSKIdentity: zabbix-agent01
+        TLSPSKFile: /etc/zabbix/zabbix_agent.psk
+        # to get key use "$ openssl rand -hex 32"
+        TLSPSK: '0ca77405116cb54f87eb1723c3ac8cdf077abb04b3aac350cb00d6dfa2322eb9'
 
-zabbix-pgsql:
-  # By default SQL dump provided by Zabbix package will be used, but you can
-  # put your own dump in corresponding directory (consult with TOFS_pattern.md)
-  # and specify path in sql_file param
-  sql_file: /usr/share/doc/zabbix-server-pgsql/custom.sql.gz
+
+
+    proxy:
+      config:
+        ProxyMode: 0
+        Server: zabbix_server.local
+        ServerActive: zabbix_server.local
+        Hostname: Zabbix_Proxy
+        Timeout: 4
+        ExternalScripts: /usr/lib/zabbix/externalscripts
+        DBDir: /srv/db # need to create dir and set permissions
+        DBName: /srv/db/zabbix_proxy.db
+        # To enable TLS (optional)
+        TLSConnect: psk
+        TLSAccept: psk
+        TLSPSKIdentity: zabbix-proxy
+        TLSPSKFile: /etc/zabbix/zabbix_proxy.psk
+        # to get key use "$ openssl rand -hex 32"
+        TLSPSK: '0ca77405116cb54f87eb1723c2ac8cdf077abb04b3aac350cb00d6dfa2322eb9'
+
+    server:   # server config
+      config:
+        DBName: zabbix
+        DBUser: zabbix
+        DBPassword: 'PassWorD$%'
+        Timeout: 30
+
+    frontend:
+      use_nginx: True # this optoion disable apache, install and configure nginx
+
+# nginx config for zabbix, it require nginx-formula
+nginx:
+  ng:
+    servers:
+      managed:
+        zabbix: # relative pathname of the server file
+          enabled: True
+          # The site MUST be disabled before delete it (if not the nginx is not reloaded)
+          deleted: False
+          overwrite: True # overwrite an existing server file or not
+          config:
+            - server:
+              - server_name: zabbix
+              - listen:
+                - 8081  # may be any, read nginx man
+              - autoindex: 'off'
+              - 'location /':
+                - root: /usr/share/zabbix
+                - fastcgi_index:
+                  - index.php
+                - index:
+                  - index.html
+                  - index.php
+                - try_files:
+                  - $uri
+                  - $uri/ =404
+                - 'location ~ .*\.php$':
+                  - 'include': fastcgi_params
+                  - fastcgi_param:
+                    - SCRIPT_FILENAME
+                    - '$document_root$fastcgi_script_name'
+                  - fastcgi_pass:
+                    - 'unix:/var/run/php/php7.0-fpm.sock' # it depend php7, need do it right
+                access_log: '/var/log/nginx/zabbix_rock.access.log'
+                error_log:
+                  - '/var/log/nginx/zabbix_rock.error.log'
+                  - warn
+
+# certs to enable HTTPS, not tested yet.
+#    certificates_path:'/etc/nginx/ssl'  # Use this if you need to deploy below certificaes in a custom path.
+# If you're doing SSL termination, you can deploy certificates this way.
+# The private one(s) should go in a separate pillar file not in version
+# control (or use encrypted pillar data)
+#    certificates:
+#      'www.example.com':
+#        public_cert: |
+#          -----BEGIN CERTIFICATE-----
+#          (Your Primary SSL certificate: www.example.com.crt)
+#          -----END CERTIFICATE-----
+#          -----BEGIN CERTIFICATE-----
+#          (Your Intermediate certificate: ExampleCA.crt)
+#          -----END CERTIFICATE-----
+#          -----BEGIN CERTIFICATE-----
+#          (Your Root certificate: TrustedRoot.crt)
+#          -----END CERTIFICATE-----
+#        private_key: |
+#          -----BEGIN RSA PRIVATE KEY-----
+#          (Your Private Key: www.example.com.key)
+#          -----END RSA PRIVATE KEY-----
+#    dh_param:
+#      'mydhparam1.pem': |
+#        -----BEGIN DH PARAMETERS-----
+#        (Your custom DH prime)
+#        -----END DH PARAMETERS-----
+#      # or to generate one on-the-fly
+#      'mydhparam2.pem':
+#        keysize: 2048
+
