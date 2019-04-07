@@ -1,0 +1,22 @@
+{% from "zabbix/ng/map.jinja" import zabbix with context %}
+
+<?php
+// Zabbix GUI configuration file
+global $DB;
+
+$DB["TYPE"]       = '{{ zabbix.server.get('dbtype', 'MYSQL') }}';
+$DB["SERVER"]     = '{{ zabbix.server.config.get('DBHost', 'localhost') }}';
+$DB["PORT"]       = '{{ zabbix.server.config.get('DBPort', '0') }}';
+$DB["DATABASE"]   = '{{ zabbix.server.config.get('DBName', 'zabbix') }}';
+$DB["USER"]       = '{{ zabbix.server.config.get('DBUser', 'zabbix') }}';
+$DB["PASSWORD"]   = '{{ zabbix.server.config.get('DBPassword', 'zabbix') }}';
+// SCHEMA is relevant only for IBM_DB2 database
+$DB["SCHEMA"]     = '{{ zabbix.server.config.get('DBSchema', '') }}';
+
+$ZBX_SERVER       = '{{ zabbix.server.config.get('Server', 'localhost') }}';
+$ZBX_SERVER_PORT  = '{{ zabbix.server.config.get('ListenPort', '10051') }}';
+$ZBX_SERVER_NAME  = '{{ zabbix.server.get('servername', 'Zabbix installed with saltstack') }}';
+
+$IMAGE_FORMAT_DEFAULT   = IMAGE_FORMAT_PNG;
+?>
+
