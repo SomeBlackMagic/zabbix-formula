@@ -4,7 +4,7 @@
     'user': 'zabbix',
     'group': 'zabbix',
     'home': '/var/lib/zabbix',
-    'shell': '/bin/false',
+    'shell': '/usr/sbin/nologin',
     'agent': {
       'pkgs': ['zabbix-agent', 'zabbix-sender'],
       'service': 'zabbix-agent',
@@ -108,8 +108,8 @@
     'version_repo': '2.2',
     'user': 'zabbix',
     'group': 'zabbix',
-    'home': '/var/lib/zabbix',
-    'shell': '/sbin/nologin',
+    'home': '/nonexistent',
+    'shell': '/usr/sbin/nologin',
     'agent': {
       'pkgs': ['zabbix22-agent'],
       'service': 'zabbix_agentd',
@@ -121,7 +121,7 @@
       'pkgs': ['zabbix22-server'],
       'service': 'zabbix',
       'config': '/usr/local/etc/zabbix22/zabbix_server.conf',
-      'dbsocket': '/var/run/mysqld/mysqld.sock',
+      'dbsocket': '/tmp/mysql.sock',
       'pidfile': '/var/run/zabbix/zabbix_server.pid',
       'logfile': '/var/log/zabbix/zabbix_server.log'
     },
@@ -129,7 +129,7 @@
       'pkgs': ['zabbix22-proxy'],
       'service': 'zabbix_proxy',
       'config': '/usr/local/etc/zabbix22/zabbix_proxy.conf',
-      'dbname': '/var/lib/zabbix/zabbix_proxy.db',
+      'dbname': 'zabbix',
       'pidfile': '/var/run/zabbix/zabbix_proxy.pid',
       'logfile': '/var/log/zabbix/zabbix_proxy.log'
     }
@@ -139,7 +139,7 @@
     'version_repo': '2.4',
     'user': '_zabbix',
     'group': '_zabbix',
-    'shell': '/sbin/nologin',
+    'shell': '/usr/sbin/nologin',
     'agent': {
       'pkgs': ['zabbix-agent'],
       'service': 'zabbix_agentd',
