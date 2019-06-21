@@ -6,16 +6,15 @@ include:
   - zabbix.server
 
 
-{{ zabbix.server.config }}:
+zabbix-server_config{{ zabbix.version_repo }}:
   file.managed:
-    {% if zabbix.version_repo|float < 3 -%}
-    - source: {{ files_switch('zabbix',
-                              ['/etc/zabbix/zabbix_server_22.conf',
-                               '/etc/zabbix/zabbix_server_22.conf.jinja']) }}
+    - name: {{ zabbix.server.config }}
+    {% if  zabbix.version_repo|float > 4 -%}
+    - source: 'salt://zabbix/files/default/etc/zabbix/zabbix_server_4.2.conf.jinja'
+    {% elif zabbix.version_repo|float < 3 -%}
+    - source: {{ files_switch('zabbix', ['/etc/zabbix/zabbix_server_22.conf', '/etc/zabbix/zabbix_server_22.conf.jinja']) }}
     {% else %}
-    - source: {{ files_switch('zabbix',
-                              ['/etc/zabbix/zabbix_server.conf',
-                               '/etc/zabbix/zabbix_server.conf.jinja']) }}
+    - source: {{ files_switch('zabbix', ['/etc/zabbix/zabbix_server.conf', '/etc/zabbix/zabbix_server.conf.jinja']) }}
     {% endif %}
     - template: jinja
     - require:

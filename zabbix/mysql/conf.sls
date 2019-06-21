@@ -15,9 +15,9 @@
 {% set dbroot_user = settings.get('dbroot_user') -%}
 {% set dbroot_pass = settings.get('dbroot_pass') -%}
 
+
 # Install Python to MySQL interface packages.
-{% if settings.get('pkgs', defaults.get('pkgs', False))
-      and not settings.get('skip_pkgs', defaults.skip_pkgs) -%}
+{% if settings.get('pkgs', defaults.get('pkgs', False)) and not settings.get('skip_pkgs', defaults.skip_pkgs) -%}
 mysql_packages:
   pkg.installed:
     - pkgs: {{ settings.get('pkgs', defaults.pkgs)|json }}
