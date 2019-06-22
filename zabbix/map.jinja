@@ -191,12 +191,14 @@
       'config': '/etc/zabbix/web/zabbix.conf.php',
       'dbtype': 'MYSQL',
       'dbhost': 'localhost',
+      'dbport': '3306',
       'dbname': 'zabbix',
       'dbuser': 'zabbix',
       'dbpassword': 'zabbix',
       'zbxserver': 'localhost',
       'zbxserverport': '10051',
-      'zbxservername': 'Zabbix installed with SaltStack'
+      'zbxservername': 'Zabbix installed with SaltStack',
+      'web_port': '80'
     },
     'proxy': {
       'pkgs': ['zabbix-proxy-sqlite3', 'zabbix-get'],

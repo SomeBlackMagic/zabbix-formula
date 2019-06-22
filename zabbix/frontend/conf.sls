@@ -3,23 +3,34 @@
 {% set config_file = salt.file.basename(zabbix.frontend.config) -%}
 {% set config_file_dir = salt.file.dirname(zabbix.frontend.config) -%}
 
+{% set settings = salt['pillar.get']('zabbix-frontend', {}) -%}
+{% set defaults = zabbix.get('frontend', {}) -%}
+
 
 include:
   - zabbix.frontend
 
 
-{{ zabbix.frontend.config }}:
+configure_zabbix:
   file.managed:
+    - name: {{ zabbix.frontend.config }}
     - source: {{ files_switch('zabbix',
-                              [zabbix.frontend.config,
-                               zabbix.frontend.config ~ '.jinja',
-                               '/etc/zabbix/web/' ~ config_file,
-                               '/etc/zabbix/web/' ~ config_file ~ '.jinja']) }}
+      [
+        zabbix.frontend.config,
+        zabbix.frontend.config ~ '.jinja',
+        '/etc/zabbix/web/' ~ config_file,
+        '/etc/zabbix/web/' ~ config_file ~ '.jinja'
+      ]) }}
     - template: jinja
     - require:
       - pkg: zabbix-frontend-php
       - file: {{ config_file_dir }}
 
+apche2_change_port:
+  file.replace:
+    - name: /etc/apache2/ports.conf
+    - pattern: '^Listen .*$'
+    - repl: 'Listen {{ settings.get('web_port', defaults.web_port) }}'
 
 # Fix permissions to allow to php-fpm include zabbix frontend config file which is usually located under /etc/zabbix
 {{ config_file_dir }}:

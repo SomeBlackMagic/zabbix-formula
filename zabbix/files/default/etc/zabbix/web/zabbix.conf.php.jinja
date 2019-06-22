@@ -9,18 +9,18 @@
 // Zabbix GUI configuration file
 global $DB;
 
-$DB["TYPE"]				= '{{ settings.get('dbtype', defaults.dbtype) }}';
-$DB["SERVER"]			= '{{ settings.get('dbhost', defaults.dbhost) }}';
-$DB["PORT"]				= '0';
-$DB["DATABASE"]			= '{{ settings.get('dbname', defaults.dbname) }}';
-$DB["USER"]				= '{{ settings.get('dbuser', defaults.dbuser) }}';
-$DB["PASSWORD"]			= '{{ settings.get('dbpassword', defaults.dbpassword) }}';
+$DB["TYPE"]           = '{{ settings.get('dbtype', defaults.dbtype) }}';
+$DB["SERVER"]         = '{{ settings.get('dbhost', defaults.dbhost) }}';
+$DB["PORT"]           = '{{ settings.get('dbport', defaults.dbport) }}';
+$DB["DATABASE"]       = '{{ settings.get('dbname', defaults.dbname) }}';
+$DB["USER"]           = '{{ settings.get('dbuser', defaults.dbuser) }}';
+$DB["PASSWORD"]       = '{{ settings.get('dbpassword', defaults.dbpassword) }}';
 // SCHEMA is relevant only for IBM_DB2 database
-$DB["SCHEMA"]			= '';
+$DB["SCHEMA"]         = '';
 
-$ZBX_SERVER				= '{{ settings.get('zbxserver', defaults.zbxserver) }}';
-$ZBX_SERVER_PORT		= '{{ settings.get('zbxserverport', defaults.zbxserverport) }}';
-$ZBX_SERVER_NAME		= '{{ settings.get('zbxservername', defaults.zbxservername) }}';
+$ZBX_SERVER           = '{{ settings.get('zbxserver', defaults.zbxserver) }}';
+$ZBX_SERVER_PORT      = '{{ settings.get('zbxserverport', defaults.zbxserverport) }}';
+$ZBX_SERVER_NAME      = '{{ settings.get('zbxservername', defaults.zbxservername) }}';
 
-$IMAGE_FORMAT_DEFAULT	= IMAGE_FORMAT_PNG;
+$IMAGE_FORMAT_DEFAULT = IMAGE_FORMAT_PNG;
 ?>

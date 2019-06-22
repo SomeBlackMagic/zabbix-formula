@@ -6,7 +6,7 @@ global $DB;
 
 $DB["TYPE"]       = '{{ zabbix.server.get('dbtype', 'MYSQL') }}';
 $DB["SERVER"]     = '{{ zabbix.server.config.get('DBHost', 'localhost') }}';
-$DB["PORT"]       = '{{ zabbix.server.config.get('DBPort', '0') }}';
+$DB["PORT"]       = '{{ zabbix.server.config.get('DBPort', '3306') }}';
 $DB["DATABASE"]   = '{{ zabbix.server.config.get('DBName', 'zabbix') }}';
 $DB["USER"]       = '{{ zabbix.server.config.get('DBUser', 'zabbix') }}';
 $DB["PASSWORD"]   = '{{ zabbix.server.config.get('DBPassword', 'zabbix') }}';
