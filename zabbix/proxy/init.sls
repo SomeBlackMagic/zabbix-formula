@@ -44,8 +44,9 @@ zabbix-proxy-piddir:
       - pkg: zabbix-proxy
 
 {% for include in settings.get('includes', defaults.get('includes', [])) %}
-{{ include }}:
+zabbix-proxy-create_{{ include }}:
   file.directory:
+    - name: {{ include }}
     - user: {{ zabbix.user }}
     - group: {{ zabbix.group }}
     - dirmode: 750
