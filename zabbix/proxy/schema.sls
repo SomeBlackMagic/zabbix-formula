@@ -1,9 +1,8 @@
 {% from "zabbix/map.jinja" import zabbix with context -%}
-{% set settings = salt['pillar.get']('zabbix-proxy', {}) -%}
-{% set defaults = zabbix.get('proxy', {}) -%}
+{% set settings = zabbix.get('proxy', {}) -%}
 
-{% set sql_structure_file = settings.get('sql_structure_file', defaults.sql_structure_file) -%}
-{% set db_path = settings.get('dbname', defaults.dbname) -%}
+{% set sql_structure_file = settings.get('sql_structure_file') -%}
+{% set db_path = settings.get('dbname') -%}
 
 {% set is_db_exsist = False -%}
 {% if salt['file.file_exists'](db_path) %}
@@ -19,7 +18,7 @@ check_db_sqllite:
 
 create_db_folder:
   file.directory:
-    - name: {{ settings.get('db_folder', defaults.db_folder) }}
+    - name: {{ settings.get('db_folder') }}
     - user: {{ zabbix.user }}
     - group: {{ zabbix.group }}
     - dirmode: 750

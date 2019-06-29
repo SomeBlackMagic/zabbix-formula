@@ -13,7 +13,9 @@ include:
   - zabbix.server.conf
 {% endif %}
 
-{% if (pillar['zabbix-agent'] is defined) and (pillar['zabbix-agent'] is not none) %}
+{% if (pillar['zabbix']['agent'] is defined) and (pillar['zabbix']['agent'] is not none) %}
+  - zabbix.agent.repo
+  - zabbix.agent.conf
   - zabbix.agent
 {% endif %}
 

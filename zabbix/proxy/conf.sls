@@ -6,8 +6,9 @@ include:
   - zabbix.proxy
 
 
-{{ zabbix.proxy.config }}:
+configure_proxy:
   file.managed:
+    - name: {{ zabbix.proxy.config }}
     - source: 'salt://zabbix/files/default/etc/zabbix/zabbix_proxy_4.2.conf.jinja'
     - template: jinja
     - require:
