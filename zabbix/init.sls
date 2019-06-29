@@ -24,7 +24,7 @@ include:
   - zabbix.frontend.repo
 {% endif %}
 
-{% if (pillar['zabbix-proxy'] is defined) and (pillar['zabbix-proxy'] is not none) %}
+{% if (pillar['zabbix']['proxy'] is defined) and (pillar['zabbix']['proxy'] is not none) %}
   - zabbix.proxy
   - zabbix.proxy.repo
   - zabbix.proxy.conf
