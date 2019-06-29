@@ -49,7 +49,7 @@
 # Default:
 # Hostname=
 
-{% if settings.get('hostname', False) %}Hostname={{ settings.get('hostname', '') }}{% endif %}
+Hostname={{ settings.get('hostname', salt['grains.get']('id')) }}
 
 ### Option: HostnameItem
 #	Item used for generating Hostname if it is undefined.
