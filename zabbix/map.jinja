@@ -164,7 +164,7 @@
       'logfilesize': '0',
       'server': ['127.0.0.1'],
       'serveractive': ['127.0.0.1'],
-      'includes': ['/etc/zabbix/zabbix_agentd.d/']
+      'includes': ['/etc/zabbix/zabbix_agentd.d/*.conf']
     },
     'server': {
       'pkgs': ['zabbix-server-mysql', 'zabbix-get'],
@@ -205,7 +205,10 @@
       'service': 'zabbix-proxy',
       'config': '/etc/zabbix/zabbix_proxy.conf',
       'dbname': '/var/lib/zabbix/zabbix_proxy.db',
+      'db_folder': '/var/lib/zabbix/',
+      'sql_structure_file': '/usr/share/doc/zabbix-proxy-sqlite3/schema.sql.gz',
       'pidfile': '/var/run/zabbix/zabbix_proxy.pid',
+      'logtype': 'file',
       'logfile': '/var/log/zabbix/zabbix_proxy.log'
     },
     'mysql': {
@@ -223,5 +226,6 @@
       'dbuser': 'zabbix',
       'dbpassword': 'zabbix'
     }
+
   },
-}, merge=salt['pillar.get']('zabbix:lookup'), base='default') %}
+}, merge=salt['pillar.get']('zabbix'), base='default') %}

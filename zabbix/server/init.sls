@@ -11,6 +11,7 @@ zabbix-server:
       {%- endfor %}
     {% if salt['grains.get']('os_family') == 'Debian' -%}
     - install_recommends: False
+    - refresh: True
     {% endif %}
     - require_in:
       - user: zabbix-formula_zabbix_user

@@ -8,9 +8,7 @@ include:
 
 {{ zabbix.proxy.config }}:
   file.managed:
-    - source: {{ files_switch('zabbix',
-                              ['/etc/zabbix/zabbix_proxy.conf',
-                               '/etc/zabbix/zabbix_proxy.conf.jinja']) }}
+    - source: 'salt://zabbix/files/default/etc/zabbix/zabbix_proxy_4.2.conf.jinja'
     - template: jinja
     - require:
       - pkg: zabbix-proxy

@@ -16,7 +16,6 @@
 # Default:
 # ProxyMode=0
 {% if settings.get('proxymode', defaults.get('proxymode', False)) %}ProxyMode={{ settings.get('proxymode', defaults.proxymode) }}{% endif %}
-
 ### Option: Server
 #	If ProxyMode is set to active mode:
 #		IP address or DNS name of Zabbix server to get configuration data from and send data to.
@@ -32,7 +31,6 @@
 # Default:
 # Server=
 {% if settings.get('server', defaults.get('server', False)) %}Server={{ settings.get('server', defaults.server) }}{% endif %}
-
 ### Option: ServerPort
 #	Port of Zabbix trapper on Zabbix server.
 #	For a proxy in the passive mode this parameter will be ignored.
@@ -42,7 +40,6 @@
 # Default:
 # ServerPort=10051
 {% if settings.get('serverport', defaults.get('serverport', False)) %}ServerPort={{ settings.get('serverport', defaults.serverport) }}{% endif %}
-
 ### Option: Hostname
 #	Unique, case sensitive Proxy name. Make sure the Proxy name is known to the server!
 #	Value is acquired from HostnameItem if undefined.
@@ -51,7 +48,6 @@
 # Default:
 # Hostname=
 {% if settings.get('hostname', defaults.get('hostname', False)) %}Hostname={{ settings.get('hostname', defaults.hostname) }}{% endif %}
-
 ### Option: HostnameItem
 #	Item used for generating Hostname if it is undefined.
 #	Ignored if Hostname is defined.
@@ -60,7 +56,6 @@
 # Default:
 # HostnameItem=system.hostname
 {% if settings.get('hostnameitem', defaults.get('hostnameitem', False)) %}HostnameItem={{ settings.get('hostnameitem', defaults.hostnameitem) }}{% endif %}
-
 ### Option: ListenPort
 #	Listen port for trapper.
 #
@@ -69,7 +64,6 @@
 # Default:
 # ListenPort=10051
 {% if settings.get('listenport', defaults.get('listenport', False)) %}ListenPort={{ settings.get('listenport', defaults.listenport) }}{% endif %}
-
 ### Option: SourceIP
 #	Source IP address for outgoing connections.
 #
@@ -77,7 +71,6 @@
 # Default:
 # SourceIP=
 {% if settings.get('sourceip', defaults.get('sourceip', False)) %}SourceIP={{ settings.get('sourceip', defaults.sourceip) }}{% endif %}
-
 ### Option: LogType
 #	Specifies where log messages are written to:
 #		system  - syslog
@@ -88,7 +81,6 @@
 # Default:
 # LogType=file
 {% if settings.get('logtype', defaults.get('logtype', False)) %}LogType={{ settings.get('logtype', defaults.logtype) }}{% endif %}
-
 ### Option: LogFile
 #	Log file name for LogType 'file' parameter.
 #
@@ -105,7 +97,6 @@
 # Default:
 # LogFileSize=1
 {% if settings.get('logfilesize', defaults.get('logfilesize', False)) %}LogFileSize={{ settings.get('logfilesize', defaults.logfilesize) }}{% endif %}
-
 ### Option: DebugLevel
 #	Specifies debug level:
 #	0 - basic information about starting and stopping of Zabbix processes
@@ -120,7 +111,6 @@
 # Default:
 # DebugLevel=3
 {% if settings.get('debuglevel', defaults.get('debuglevel', False)) %}DebugLevel={{ settings.get('debuglevel', defaults.debuglevel) }}{% endif %}
-
 ### Option: EnableRemoteCommands
 #		Whether remote commands from Zabbix server are allowed.
 #		0 - not allowed
@@ -139,8 +129,6 @@
 # Default:
 # LogRemoteCommands=0
 {% if settings.get('logremotecommands', defaults.get('logremotecommands', False)) %}LogRemoteCommands={{ settings.get('logremotecommands', defaults.logremotecommands) }}{% endif %}
-{% endif %}
-
 ### Option: PidFile
 #	Name of PID file.
 #
@@ -148,7 +136,6 @@
 # Default:
 # PidFile=/tmp/zabbix_proxy.pid
 {% if settings.get('pidfile', defaults.get('pidfile', False)) %}PidFile={{ settings.get('pidfile', defaults.pidfile) }}{% endif %}
-
 ### Option: SocketDir
 #	IPC socket directory.
 #		Directory to store IPC sockets used by internal Zabbix services.
@@ -157,8 +144,6 @@
 # Default:
 # SocketDir=/tmp
 {% if settings.get('socketdir', defaults.get('socketdir', False)) %}SocketDir={{ settings.get('socketdir', defaults.socketdir) }}{% endif %}
-{% endif %}
-
 ### Option: DBHost
 #	Database host name.
 #	If set to localhost, socket is used for MySQL.
@@ -168,7 +153,6 @@
 # Default:
 # DBHost=localhost
 {% if settings.get('dbhost', defaults.get('dbhost', False)) %}DBHost={{ settings.get('dbhost', defaults.dbhost) }}{% endif %}
-
 ### Option: DBName
 #	Database name.
 #	For SQLite3 path to database file must be provided. DBUser and DBPassword are ignored.
@@ -178,7 +162,6 @@
 # Default:
 # DBName=
 {% if settings.get('dbname', defaults.get('dbname', False)) %}DBName={{ settings.get('dbname', defaults.dbname) }}{% endif %}
-
 ### Option: DBSchema
 #	Schema name. Used for IBM DB2 and PostgreSQL.
 #
@@ -186,14 +169,12 @@
 # Default:
 # DBSchema=
 {% if settings.get('dbschema', defaults.get('dbschema', False)) %}DBSchema={{ settings.get('dbschema', defaults.dbschema) }}{% endif %}
-
 ### Option: DBUser
 #	Database user. Ignored for SQLite.
 #
 # Default:
 # DBUser=
 {% if settings.get('dbuser', defaults.get('dbuser', False)) %}DBUser={{ settings.get('dbuser', defaults.dbuser) }}{% endif %}
-
 ### Option: DBPassword
 #	Database password. Ignored for SQLite.
 #	Comment this line if no password is used.
@@ -202,7 +183,6 @@
 # Default:
 # DBPassword=
 {% if settings.get('dbpass', defaults.get('dbpass', False)) %}DBPassword={{ settings.get('dbpass', defaults.dbpass) }}{% endif %}
-
 ### Option: DBSocket
 #	Path to MySQL socket.
 #
@@ -210,7 +190,6 @@
 # Default:
 # DBSocket=
 {% if settings.get('dbsocket', defaults.get('dbsocket', False)) %}DBSocket={{ settings.get('dbsocket', defaults.dbsocket) }}{% endif %}
-
 # Option: DBPort
 #	Database port when not using local socket. Ignored for SQLite.
 #
@@ -218,7 +197,6 @@
 # Default:
 # DBPort=
 {% if settings.get('dbport', defaults.get('dbport', False)) %}DBPort={{ settings.get('dbport', defaults.dbport) }}{% endif %}
-
 ######### PROXY SPECIFIC PARAMETERS #############
 
 ### Option: ProxyLocalBuffer
@@ -230,7 +208,6 @@
 # Default:
 # ProxyLocalBuffer=0
 {% if settings.get('proxylocalbuffer', defaults.get('proxylocalbuffer', False)) %}ProxyLocalBuffer={{ settings.get('proxylocalbuffer', defaults.proxylocalbuffer) }}{% endif %}
-
 ### Option: ProxyOfflineBuffer
 #	Proxy will keep data for N hours in case if no connectivity with Zabbix Server.
 #	Older data will be lost.
@@ -240,7 +217,6 @@
 # Default:
 # ProxyOfflineBuffer=1
 {% if settings.get('proxyofflinebuffer', defaults.get('proxyofflinebuffer', False)) %}ProxyOfflineBuffer={{ settings.get('proxyofflinebuffer', defaults.proxyofflinebuffer) }}{% endif %}
-
 ### Option: HeartbeatFrequency
 #	Frequency of heartbeat messages in seconds.
 #	Used for monitoring availability of Proxy on server side.
@@ -252,7 +228,6 @@
 # Default:
 # HeartbeatFrequency=60
 {% if settings.get('heartbeatfrequency', defaults.get('heartbeatfrequency', False)) %}HeartbeatFrequency={{ settings.get('heartbeatfrequency', defaults.heartbeatfrequency) }}{% endif %}
-
 ### Option: ConfigFrequency
 #	How often proxy retrieves configuration data from Zabbix Server in seconds.
 #	For a proxy in the passive mode this parameter will be ignored.
@@ -262,7 +237,6 @@
 # Default:
 # ConfigFrequency=3600
 {% if settings.get('configfrequency', defaults.get('configfrequency', False)) %}ConfigFrequency={{ settings.get('configfrequency', defaults.configfrequency) }}{% endif %}
-
 ### Option: DataSenderFrequency
 #	Proxy will send collected data to the Server every N seconds.
 #	For a proxy in the passive mode this parameter will be ignored.
@@ -272,7 +246,6 @@
 # Default:
 # DataSenderFrequency=1
 {% if settings.get('datasenderfrequency', defaults.get('datasenderfrequency', False)) %}DataSenderFrequency={{ settings.get('datasenderfrequency', defaults.datasenderfrequency) }}{% endif %}
-
 ############ ADVANCED PARAMETERS ################
 
 ### Option: StartPollers
@@ -283,7 +256,6 @@
 # Default:
 # StartPollers=5
 {% if settings.get('startpollers', defaults.get('startpollers', False)) %}StartPollers={{ settings.get('startpollers', defaults.startpollers) }}{% endif %}
-
 ### Option: StartIPMIPollers
 #	Number of pre-forked instances of IPMI pollers.
 #		The IPMI manager process is automatically started when at least one IPMI poller is started.
@@ -293,7 +265,6 @@
 # Default:
 # StartIPMIPollers=0
 {% if settings.get('startipmipollers', defaults.get('startipmipollers', False)) %}StartIPMIPollers={{ settings.get('startipmipollers', defaults.startipmipollers) }}{% endif %}
-
 ### Option: StartPreprocessors
 #	Number of pre-forked instances of preprocessing workers.
 #		The preprocessing manager process is automatically started when preprocessor worker is started.
@@ -313,7 +284,6 @@
 # Default:
 # StartPollersUnreachable=1
 {% if settings.get('startpollersunreachable', defaults.get('startpollersunreachable', False)) %}StartPollersUnreachable={{ settings.get('startpollersunreachable', defaults.startpollersunreachable) }}{% endif %}
-
 ### Option: StartTrappers
 #	Number of pre-forked instances of trappers.
 #	Trappers accept incoming connections from Zabbix sender and active agents.
@@ -323,7 +293,6 @@
 # Default:
 # StartTrappers=5
 {% if settings.get('starttrappers', defaults.get('starttrappers', False)) %}StartTrappers={{ settings.get('starttrappers', defaults.starttrappers) }}{% endif %}
-
 ### Option: StartPingers
 #	Number of pre-forked instances of ICMP pingers.
 #
@@ -332,7 +301,6 @@
 # Default:
 # StartPingers=1
 {% if settings.get('startpingers', defaults.get('startpingers', False)) %}StartPingers={{ settings.get('startpingers', defaults.startpingers) }}{% endif %}
-
 ### Option: StartDiscoverers
 #	Number of pre-forked instances of discoverers.
 #
@@ -341,7 +309,6 @@
 # Default:
 # StartDiscoverers=1
 {% if settings.get('startdiscoverers', defaults.get('startdiscoverers', False)) %}StartDiscoverers={{ settings.get('startdiscoverers', defaults.startdiscoverers) }}{% endif %}
-
 ### Option: StartHTTPPollers
 #	Number of pre-forked instances of HTTP pollers.
 #
@@ -379,7 +346,6 @@ JavaGatewayPort={{ settings.get('javagatewayport', defaults.javagatewayport) }}
 # StartJavaPollers=0
 StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) }}
 {% endif %}
-
 ### Option: StartVMwareCollectors
 #	Number of pre-forked vmware collector instances.
 #
@@ -388,7 +354,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # StartVMwareCollectors=0
 {% if settings.get('startvmwarecollectors', defaults.get('startvmwarecollectors', False)) %}StartVMwareCollectors={{ settings.get('startvmwarecollectors', defaults.startvmwarecollectors) }}{% endif %}
-
 ### Option: VMwareFrequency
 #	How often Zabbix will connect to VMware service to obtain a new data.
 #
@@ -397,7 +362,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # VMwareFrequency=60
 {% if settings.get('vmwarefrequency', defaults.get('vmwarefrequency', False)) %}VMwareFrequency={{ settings.get('vmwarefrequency', defaults.vmwarefrequency) }}{% endif %}
-
 ### Option: VMwarePerfFrequency
 #	How often Zabbix will connect to VMware service to obtain performance data.
 #
@@ -406,7 +370,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # VMwarePerfFrequency=60
 {% if settings.get('vmwareperffrequency', defaults.get('vmwareperffrequency', False)) %}VMwarePerfFrequency={{ settings.get('vmwareperffrequency', defaults.vmwareperffrequency) }}{% endif %}
-
 ### Option: VMwareCacheSize
 #	Size of VMware cache, in bytes.
 #	Shared memory size for storing VMware data.
@@ -417,7 +380,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # VMwareCacheSize=8M
 {% if settings.get('vmwarecachesize', defaults.get('vmwarecachesize', False)) %}VMwareCacheSize={{ settings.get('vmwarecachesize', defaults.vmwarecachesize) }}{% endif %}
-
 ### Option: VMwareTimeout
 #	Specifies how many seconds vmware collector waits for response from VMware service.
 #
@@ -426,7 +388,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # VMwareTimeout=10
 {% if settings.get('vmwaretimeout', defaults.get('vmwaretimeout', False)) %}VMwareTimeout={{ settings.get('vmwaretimeout', defaults.vmwaretimeout) }}{% endif %}
-
 ### Option: SNMPTrapperFile
 #	Temporary file used for passing data from SNMP trap daemon to the proxy.
 #	Must be the same as in zabbix_trap_receiver.pl or SNMPTT configuration file.
@@ -435,7 +396,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # SNMPTrapperFile=/tmp/zabbix_traps.tmp
 {% if settings.get('snmptrapperfile', defaults.get('snmptrapperfile', False)) %}SNMPTrapperFile={{ settings.get('snmptrapperfile', defaults.snmptrapperfile) }}{% endif %}
-
 ### Option: StartSNMPTrapper
 #	If 1, SNMP trapper process is started.
 #
@@ -444,7 +404,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # StartSNMPTrapper=0
 {% if settings.get('startsnmptrapper', defaults.get('startsnmptrapper', False)) %}StartSNMPTrapper={{ settings.get('startsnmptrapper', defaults.startsnmptrapper) }}{% endif %}
-
 ### Option: ListenIP
 #	List of comma delimited IP addresses that the trapper should listen on.
 #	Trapper will listen on all network interfaces if this parameter is missing.
@@ -453,7 +412,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # ListenIP=0.0.0.0
 {% if settings.get('listenip', defaults.get('listenip', False)) %}ListenIP={{ settings.get('listenip', defaults.listenip) }}{% endif %}
-
 ### Option: HousekeepingFrequency
 #	How often Zabbix will perform housekeeping procedure (in hours).
 #	Housekeeping is removing outdated information from the database.
@@ -469,7 +427,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # HousekeepingFrequency=1
 {% if settings.get('housekeepingfrequency', defaults.get('housekeepingfrequency', False)) %}HousekeepingFrequency={{ settings.get('housekeepingfrequency', defaults.housekeepingfrequency) }}{% endif %}
-
 ### Option: CacheSize
 #	Size of configuration cache, in bytes.
 #	Shared memory size, for storing hosts and items data.
@@ -479,7 +436,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # CacheSize=8M
 {% if settings.get('cachesize', defaults.get('cachesize', False)) %}CacheSize={{ settings.get('cachesize', defaults.cachesize) }}{% endif %}
-
 ### Option: StartDBSyncers
 #	Number of pre-forked instances of DB Syncers.
 #
@@ -488,7 +444,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # StartDBSyncers=4
 {% if settings.get('startdbsyncers', defaults.get('startdbsyncers', False)) %}StartDBSyncers={{ settings.get('startdbsyncers', defaults.startdbsyncers) }}{% endif %}
-
 ### Option: HistoryCacheSize
 #	Size of history cache, in bytes.
 #	Shared memory size for storing history data.
@@ -498,7 +453,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # HistoryCacheSize=16M
 {% if settings.get('historycachesize', defaults.get('historycachesize', False)) %}HistoryCacheSize={{ settings.get('historycachesize', defaults.historycachesize) }}{% endif %}
-
 ### Option: HistoryIndexCacheSize
 #	Size of history index cache, in bytes.
 #	Shared memory size for indexing history cache.
@@ -508,7 +462,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # HistoryIndexCacheSize=4M
 {% if settings.get('historyindexcachesize', defaults.get('historyindexcachesize', False)) %}HistoryIndexCacheSize={{ settings.get('historyindexcachesize', defaults.historyindexcachesize) }}{% endif %}
-
 ### Option: Timeout
 #	Specifies how long we wait for agent, SNMP device or external check (in seconds).
 #
@@ -517,7 +470,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # Timeout=3
 {% if settings.get('timeout', defaults.get('timeout', False)) %}Timeout={{ settings.get('timeout', defaults.timeout) }}{% endif %}
-
 ### Option: TrapperTimeout
 #	Specifies how many seconds trapper may spend processing new data.
 #
@@ -526,7 +478,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # TrapperTimeout=300
 {% if settings.get('trappertimeout', defaults.get('trappertimeout', False)) %}TrapperTimeout={{ settings.get('trappertimeout', defaults.trappertimeout) }}{% endif %}
-
 ### Option: UnreachablePeriod
 #	After how many seconds of unreachability treat a host as unavailable.
 #
@@ -535,7 +486,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # UnreachablePeriod=45
 {% if settings.get('unreachableperiod', defaults.get('unreachableperiod', False)) %}UnreachablePeriod={{ settings.get('unreachableperiod', defaults.unreachableperiod) }}{% endif %}
-
 ### Option: UnavailableDelay
 #	How often host is checked for availability during the unavailability period, in seconds.
 #
@@ -544,7 +494,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # UnavailableDelay=60
 {% if settings.get('unavaliabledelay', defaults.get('unavaliabledelay', False)) %}UnavailableDelay={{ settings.get('unavaliabledelay', defaults.unavaliabledelay) }}{% endif %}
-
 ### Option: UnreachableDelay
 #	How often host is checked for availability during the unreachability period, in seconds.
 #
@@ -562,7 +511,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # ExternalScripts=${datadir}/zabbix/externalscripts
 {% if settings.get('externalscripts', defaults.get('externalscripts', False)) %}ExternalScripts={{ settings.get('externalscripts', defaults.externalscripts) }}{% endif %}
-
 ### Option: FpingLocation
 #	Location of fping.
 #	Make sure that fping binary has root ownership and SUID flag set.
@@ -571,7 +519,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # FpingLocation=/usr/sbin/fping
 {% if settings.get('fpinglocation', defaults.get('fpinglocation', False)) %}FpingLocation={{ settings.get('fpinglocation', defaults.fpinglocation) }}{% endif %}
-
 ### Option: Fping6Location
 #	Location of fping6.
 #	Make sure that fping6 binary has root ownership and SUID flag set.
@@ -581,7 +528,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # Fping6Location=/usr/sbin/fping6
 {% if settings.get('fping6location', defaults.get('fping6location', False)) %}Fping6Location={{ settings.get('fping6location', defaults.fping6location) }}{% endif %}
-
 ### Option: SSHKeyLocation
 #	Location of public and private keys for SSH checks and actions.
 #
@@ -589,7 +535,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # SSHKeyLocation=
 {% if settings.get('sshkeylocation', defaults.get('sshkeylocation', False)) %}SSHKeyLocation={{ settings.get('sshkeylocation', defaults.sshkeylocation) }}{% endif %}
-
 ### Option: LogSlowQueries
 #	How long a database query may take before being logged (in milliseconds).
 #	Only works if DebugLevel set to 3 or 4.
@@ -600,7 +545,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # LogSlowQueries=0
 {% if settings.get('logslowqueries', defaults.get('logslowqueries', False)) %}LogSlowQueries={{ settings.get('logslowqueries', defaults.logslowqueries) }}{% endif %}
-
 ### Option: TmpDir
 #	Temporary directory.
 #
@@ -608,7 +552,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # TmpDir=/tmp
 {% if settings.get('tmpdir', defaults.get('tmpdir', False)) %}TmpDir={{ settings.get('tmpdir', defaults.tmpdir) }}{% endif %}
-
 ### Option: AllowRoot
 #	Allow the proxy to run as 'root'. If disabled and the proxy is started by 'root', the proxy
 #	will try to switch to the user specified by the User configuration option instead.
@@ -620,7 +563,6 @@ StartJavaPollers={{ settings.get('startjavapollers', defaults.startjavapollers) 
 # Default:
 # AllowRoot=0
 {% if settings.get('allowroot', defaults.get('allowroot', False)) %}AllowRoot={{ settings.get('allowroot', defaults.allowroot) }}{% endif %}
-
 ### Option: User
 #	Drop privileges to a specific, existing user on the system.
 #	Only has effect if run as 'root' and AllowRoot is disabled.
@@ -657,7 +599,6 @@ Include={{ include }}
 # Default:
 # SSLCertLocation=${datadir}/zabbix/ssl/certs
 {% if settings.get('sslcertlocation', defaults.get('sslcertlocation', False)) %}SSLCertLocation={{ settings.get('sslcertlocation', defaults.sslcertlocation) }}{% endif %}
-
 ### Option: SSLKeyLocation
 #	Location of private keys for SSL client certificates.
 #	This parameter is used only in web monitoring.
@@ -668,7 +609,6 @@ Include={{ include }}
 # Default:
 # SSLKeyLocation=${datadir}/zabbix/ssl/keys
 {% if settings.get('sslkeylocation', defaults.get('sslkeylocation', False)) %}SSLKeyLocation={{ settings.get('sslkeylocation', defaults.sslkeylocation) }}{% endif %}
-
 ### Option: SSLCALocation
 #	Location of certificate authority (CA) files for SSL server certificate verification.
 #	If not set, system-wide directory will be used.
@@ -678,8 +618,6 @@ Include={{ include }}
 # Default:
 # SSLCALocation=
 {% if settings.get('sslcalocation', defaults.get('sslcalocation', False)) %}SSLCALocation={{ settings.get('sslcalocation', defaults.sslcalocation) }}{% endif %}
-{% endif %}
-
 ####### LOADABLE MODULES #######
 
 ### Option: LoadModulePath
@@ -732,7 +670,6 @@ StatsAllowedIP=127.0.0.1
 # Default:
 # TLSConnect=unencrypted
 {% if settings.get('tlsconnect', defaults.get('tlsconnect', False)) %}TLSConnect={{ settings.get('tlsconnect', defaults.tlsconnect) }}{% endif %}
-
 ### Option: TLSAccept
 #	What incoming connections to accept from Zabbix server. Used for a passive proxy, ignored on an active proxy.
 #	Multiple values can be specified, separated by comma:
@@ -744,7 +681,6 @@ StatsAllowedIP=127.0.0.1
 # Default:
 # TLSAccept=unencrypted
 {% if settings.get('tlsaccept', defaults.get('tlsaccept', False)) %}TLSAccept={{ settings.get('tlsaccept', defaults.tlsaccept) }}{% endif %}
-
 ### Option: TLSCAFile
 #	Full pathname of a file containing the top-level CA(s) certificates for
 #	peer certificate verification.
@@ -753,7 +689,6 @@ StatsAllowedIP=127.0.0.1
 # Default:
 # TLSCAFile=
 {% if settings.get('tlscafile', defaults.get('tlscafile', False)) %}TLSCAFile={{ settings.get('tlscafile', defaults.tlscafile) }}{% endif %}
-
 ### Option: TLSCRLFile
 #	Full pathname of a file containing revoked certificates.
 #
@@ -761,7 +696,6 @@ StatsAllowedIP=127.0.0.1
 # Default:
 # TLSCRLFile=
 {% if settings.get('tlscrlfile', defaults.get('tlscrlfile', False)) %}TLSCRLFile={{ settings.get('tlscrlfile', defaults.tlscrlfile) }}{% endif %}
-
 ### Option: TLSServerCertIssuer
 #		Allowed server certificate issuer.
 #
@@ -769,7 +703,6 @@ StatsAllowedIP=127.0.0.1
 # Default:
 # TLSServerCertIssuer=
 {% if settings.get('tlsservercertissuer', defaults.get('tlsservercertissuer', False)) %}TLSServerCertIssuer={{ settings.get('tlsservercertissuer', defaults.tlsservercertissuer) }}{% endif %}
-
 ### Option: TLSServerCertSubject
 #		Allowed server certificate subject.
 #
@@ -777,7 +710,6 @@ StatsAllowedIP=127.0.0.1
 # Default:
 # TLSServerCertSubject=
 {% if settings.get('tlsservercertsubject', defaults.get('tlsservercertsubject', False)) %}TLSServerCertSubject={{ settings.get('tlsservercertsubject', defaults.tlsservercertsubject) }}{% endif %}
-
 ### Option: TLSCertFile
 #	Full pathname of a file containing the proxy certificate or certificate chain.
 #
@@ -785,7 +717,6 @@ StatsAllowedIP=127.0.0.1
 # Default:
 # TLSCertFile=
 {% if settings.get('tlscertfile', defaults.get('tlscertfile', False)) %}TLSCertFile={{ settings.get('tlscertfile', defaults.tlscertfile) }}{% endif %}
-
 ### Option: TLSKeyFile
 #	Full pathname of a file containing the proxy private key.
 #
@@ -793,7 +724,6 @@ StatsAllowedIP=127.0.0.1
 # Default:
 # TLSKeyFile=
 {% if settings.get('tlskeyfile', defaults.get('tlskeyfile', False)) %}TLSKeyFile={{ settings.get('tlskeyfile', defaults.tlskeyfile) }}{% endif %}
-
 ### Option: TLSPSKIdentity
 #	Unique, case sensitive string used to identify the pre-shared key.
 #
@@ -801,7 +731,6 @@ StatsAllowedIP=127.0.0.1
 # Default:
 # TLSPSKIdentity=
 {% if settings.get('tlspskidentity', defaults.get('tlspskidentity', False)) %}TLSPSKIdentity={{ settings.get('tlspskidentity', defaults.tlspskidentity) }}{% endif %}
-
 ### Option: TLSPSKFile
 #	Full pathname of a file containing the pre-shared key.
 #

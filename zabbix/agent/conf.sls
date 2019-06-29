@@ -6,11 +6,10 @@ include:
   - zabbix.agent
 
 
-{{ zabbix.agent.config }}:
+zabbix_agent_configure:
   file.managed:
-    - source: {{ files_switch('zabbix',
-                              ['/etc/zabbix/zabbix_agentd.conf',
-                               '/etc/zabbix/zabbix_agentd.conf.jinja']) }}
+    - name: {{ zabbix.agent.config }}
+    - source: salt://zabbix/files/default/etc/zabbix/zabbix_agentd_4.2.conf.jinja
     - template: jinja
     - require:
       - pkg: zabbix-agent

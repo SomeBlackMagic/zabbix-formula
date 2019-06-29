@@ -7,6 +7,7 @@ include:
 
 zabbix-proxy:
   pkg.installed:
+    - refresh: True
     - pkgs:
       {%- for name in zabbix.proxy.pkgs %}
       - {{ name }}{% if zabbix.proxy.version is defined and 'zabbix' in name %}: '{{ zabbix.proxy.version }}'{% endif %}
@@ -44,9 +45,8 @@ zabbix-proxy-piddir:
       - pkg: zabbix-proxy
 
 {% for include in settings.get('includes', defaults.get('includes', [])) %}
-zabbix-proxy-create_{{ include }}:
+{{ include }}:
   file.directory:
-    - name: {{ include }}
     - user: {{ zabbix.user }}
     - group: {{ zabbix.group }}
     - dirmode: 750

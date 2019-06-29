@@ -3,6 +3,11 @@ include:
   - zabbix.repo
 {% endif %}
 
+{% if (pillar['zabbix-mysql'] is defined) and (pillar['zabbix-mysql'] is not none) %}
+  - zabbix.mysql.conf
+  - zabbix.mysql.schema
+{% endif %}
+
 {% if (pillar['zabbix-server'] is defined) and (pillar['zabbix-server'] is not none) %}
   - zabbix.server.repo
   - zabbix.server.conf
@@ -17,7 +22,9 @@ include:
   - zabbix.frontend.repo
 {% endif %}
 
-{% if (pillar['zabbix-mysql'] is defined) and (pillar['zabbix-mysql'] is not none) %}
-  - zabbix.mysql.conf
-  - zabbix.mysql.schema
+{% if (pillar['zabbix-proxy'] is defined) and (pillar['zabbix-proxy'] is not none) %}
+  - zabbix.proxy
+  - zabbix.proxy.repo
+  - zabbix.proxy.conf
+  - zabbix.proxy.schema
 {% endif %}

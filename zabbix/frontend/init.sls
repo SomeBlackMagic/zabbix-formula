@@ -2,6 +2,7 @@
 
 zabbix-frontend-php:
   pkg.installed:
+    - refresh: True
     - pkgs:
       {%- for name in zabbix.frontend.pkgs %}
       - {{ name }}{% if zabbix.frontend.version is defined and 'zabbix' in name %}: '{{ zabbix.frontend.version }}'{% endif %}
