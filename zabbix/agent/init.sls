@@ -3,6 +3,8 @@
 {% set defaults = zabbix.get('agent', {}) -%}
 
 include:
+  - zabbix.agent.repo
+  - zabbix.agent.conf
   - zabbix.users
 
 zabbix-agent:
